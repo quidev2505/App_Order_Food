@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ui/welcome_page.dart';
-import 'ui/authentication/login_page.dart';
+import 'ui/authentication/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const SafeArea(
-        child: LoginPage(),
+        child: RegisterPage(),
       ),
     );
   }
