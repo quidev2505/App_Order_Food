@@ -2,15 +2,15 @@
 
 Học kỳ 2, Năm học 2022-2023
 
-**MSSV 1** : 
+**MSSV 1** : B1910015
 
-**Họ tên SV 1**:
+**Họ tên SV 1**: Lê Nhựt Trường
 
-**MSSV 2**:
+**MSSV 2**: B1909976
 
-**Họ tên SV 2**:
+**Họ tên SV 2**: Phan Thành Quí
 
-**Lớp học phần**:
+**Lớp học phần**: CT48402
 
-**Tên dự án**:
+**Tên dự án**: Xây dựng ứng dụng đặt hàng thức ăn nhanh
 
