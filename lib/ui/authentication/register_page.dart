@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool loading = false;
   late UserCredential userCredential;
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -38,6 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
         'password': password.text.trim(),
         'userid': userCredential.user?.uid,
       });
+      setState(() {
+        loading = false;
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -58,6 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     } catch (e) {
       print(e);
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -146,6 +153,9 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       return;
     } else {
+      setState(() {
+        loading = true;
+      });
       sendData();
       //Thông báo đăng ký tài khoản thành công
       ScaffoldMessenger.of(context).showSnackBar(
@@ -209,24 +219,26 @@ class _RegisterPageState extends State<RegisterPage> {
           SizedBox(
             width: 200,
             height: 60,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.green, width: 2),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: const Text(
-                "Đăng ký",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                validation();
-              },
-            ),
+            child: loading
+                ? const Center(child: CircularProgressIndicator())
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.green, width: 2),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: const Text(
+                      "Đăng ký",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      validation();
+                    },
+                  ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
