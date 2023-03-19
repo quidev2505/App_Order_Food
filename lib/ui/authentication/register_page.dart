@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
 
@@ -9,12 +12,54 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  late UserCredential userCredential;
   TextEditingController fullName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
 
   GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+
+  Future sendData() async {
+    try {
+      userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      );
+
+      await FirebaseFirestore.instance
+          .collection('userData')
+          .doc(userCredential.user?.uid)
+          .set({
+        'fullName': fullName.text,
+        'email': email.text.trim(),
+        'phoneNumber': phoneNumber.text.trim(),
+        'password': password.text.trim(),
+        'userid': userCredential.user?.uid,
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Mật khẩu quá yếu",
+            ),
+          ),
+        );
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Email đã được sử dụng",
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void validation() {
     if (fullName.text.trim().isEmpty) {
@@ -100,6 +145,16 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
       return;
+    } else {
+      sendData();
+      //Thông báo đăng ký tài khoản thành công
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Đăng ký tài khoản thành công",
+          ),
+        ),
+      );
     }
   }
 
