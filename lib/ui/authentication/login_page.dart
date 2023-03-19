@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/widget/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -9,7 +10,9 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.green,
         leading: IconButton(
-          onPressed: () => {},
+          onPressed: () => {
+            print('đây là nút để về trang welcome page'),
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
@@ -27,13 +30,23 @@ class LoginPage extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             Column(
-              children: [
-                textField(hintTextInput: "Email", icon: Icons.email),
-                const SizedBox(height: 20),
-                textField(hintTextInput: "Password", icon: Icons.lock_outline)
+              children: const [
+                MyTextField(
+                  hintTextInput: "Email",
+                  icon: Icons.email,
+                  secureText: false,
+                  controller: null,
+                ),
+                SizedBox(height: 20),
+                MyTextField(
+                  hintTextInput: "Password",
+                  icon: Icons.lock_outline,
+                  secureText: true,
+                  controller: null,
+                )
               ],
             ),
-            Container(
+            SizedBox(
               width: 200,
               height: 60,
               child: ElevatedButton(
@@ -55,9 +68,9 @@ class LoginPage extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Bạn chưa có tài khoản?"),
-                const Text(
+              children: const [
+                Text("Bạn chưa có tài khoản?"),
+                Text(
                   "Đăng ký ngay",
                   style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
@@ -65,20 +78,6 @@ class LoginPage extends StatelessWidget {
               ],
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget textField(
-      {required String hintTextInput, required IconData icon, required}) {
-    return TextFormField(
-      decoration: InputDecoration(
-        prefixIcon: Icon(icon),
-        hintText: hintTextInput,
-        hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
         ),
       ),
     );
