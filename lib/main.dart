@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xff2b2b2b),
+        appBarTheme: const AppBarTheme(
+          color: Color(0xff2b2b2b),
+        ),
       ),
       home: const SafeArea(
         child: WelcomePage(),
