@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/authentication/login_page.dart';
+import 'package:myproject_app/ui/authentication/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -57,16 +59,48 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                button(
-                    // nút để qua trang login page
-                    nameButton: "Đăng nhập",
-                    color: Colors.green,
-                    textColor: Colors.white),
-                button(
-                    //nút để qua trang register page
-                    nameButton: "Đăng ký",
-                    color: Colors.white,
-                    textColor: Colors.green),
+                TextButton(
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.green),
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(Colors.white),
+                      minimumSize: MaterialStateProperty.all(Size(300, 50)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.green)))),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
+                  },
+                  child: Text('Đăng nhập'),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(Colors.green),
+                      minimumSize: MaterialStateProperty.all(Size(300, 50)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.green)))),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPage(),
+                      ),
+                    );
+                  },
+                  child: Text('Đăng ký'),
+                )
               ],
             ),
           ),

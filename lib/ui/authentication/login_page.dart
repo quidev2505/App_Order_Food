@@ -117,9 +117,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         leading: IconButton(
-          onPressed: () => {
-            print('đây là nút để về trang welcome page'),
-          },
+          onPressed: () => {Navigator.pop(context)},
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
