@@ -1,8 +1,11 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -18,6 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  String imageURL = "";
 
   GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
@@ -38,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
         'phoneNumber': phoneNumber.text.trim(),
         'password': password.text.trim(),
         'userid': userCredential.user?.uid,
+        'image': imageURL,
       });
       setState(() {
         loading = false;
@@ -216,6 +222,35 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ],
           ),
+          IconButton(
+            onPressed: () async {
+              final ImagePicker imagePicker = ImagePicker();
+              XFile? file =
+                  await imagePicker.pickImage(source: ImageSource.gallery);
+
+              print('${file?.path}');
+
+              if (file == null) {
+                return;
+              }
+
+              String radomFileName =
+                  DateTime.now().microsecondsSinceEpoch.toString();
+
+              Reference referenceRoot = FirebaseStorage.instance.ref();
+              Reference referenceDirImages = referenceRoot.child('images');
+
+              Reference referenceImageToUpload =
+                  referenceDirImages.child(radomFileName);
+              try {
+                await referenceImageToUpload.putFile(File(file.path));
+                imageURL = await referenceImageToUpload.getDownloadURL();
+              } catch (error) {
+                print(error);
+              }
+            },
+            icon: const Icon(Icons.image),
+          ),
           SizedBox(
             width: 200,
             height: 60,
@@ -236,6 +271,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     onPressed: () {
+                      if (imageURL.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Vui lòng chọn ảnh đại diện",
+                            ),
+                          ),
+                        );
+                        return;
+                      }
                       validation();
                     },
                   ),

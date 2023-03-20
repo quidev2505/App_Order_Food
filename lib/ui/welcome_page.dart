@@ -64,12 +64,12 @@ class WelcomePage extends StatelessWidget {
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.green),
                       backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.white),
+                          const MaterialStatePropertyAll<Color>(Colors.white),
                       minimumSize: MaterialStateProperty.all(Size(300, 50)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.green)))),
+                              side: const BorderSide(color: Colors.green)))),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -78,19 +78,19 @@ class WelcomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text('Đăng nhập'),
+                  child: const Text('Đăng nhập'),
                 ),
                 TextButton(
                   style: ButtonStyle(
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.green),
+                          const MaterialStatePropertyAll<Color>(Colors.green),
                       minimumSize: MaterialStateProperty.all(Size(300, 50)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: Colors.green)))),
+                              side: const BorderSide(color: Colors.green)))),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -99,7 +99,7 @@ class WelcomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text('Đăng ký'),
+                  child: const Text('Đăng ký'),
                 )
               ],
             ),

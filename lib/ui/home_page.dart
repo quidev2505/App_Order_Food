@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Đây là trang chủ"),
+        title: const Text("Đây là trang chủ"),
       ),
     );
   }
