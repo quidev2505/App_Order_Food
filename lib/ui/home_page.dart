@@ -69,13 +69,68 @@ class _HomePageState extends State<HomePage> {
         ]));
   }
 
+  Widget drawerItem({required String name, required IconData icon}) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      title: Text(
+        name,
+        style: const TextStyle(fontSize: 20, color: Colors.white),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
+      drawer: Drawer(
+        child: Container(
+          color: const Color(0xff2b2b2b),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/background.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/profile.jpg'),
+                  ),
+                  accountName: Text('Trường'),
+                  accountEmail: Text('truong@gmail.com'),
+                ),
+                drawerItem(name: "Profile", icon: Icons.person),
+                drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
+                drawerItem(name: "Order", icon: Icons.shop),
+                const Divider(
+                  thickness: 2,
+                  color: Colors.white,
+                ),
+                const ListTile(
+                  leading: Text(
+                    'Communicate',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                drawerItem(name: "Change", icon: Icons.lock),
+                drawerItem(name: "Logout", icon: Icons.exit_to_app),
+              ],
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         elevation: 0.0,
-        leading: const Icon(Icons.sort),
         actions: const [
           Padding(
             padding: EdgeInsets.all(9.0),
