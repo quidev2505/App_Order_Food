@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/authentication/login_page.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -41,13 +42,27 @@ class _RegisterPageState extends State<RegisterPage> {
         'fullName': fullName.text,
         'email': email.text.trim(),
         'phoneNumber': phoneNumber.text.trim(),
-        'password': password.text.trim(),
+        // 'password': password.text.trim(),
         'userid': userCredential.user?.uid,
         'image': imageURL,
       });
+      //Thông báo đăng ký tài khoản thành công
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Đăng ký tài khoản thành công",
+          ),
+        ),
+      );
       setState(() {
         loading = false;
       });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -57,6 +72,10 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         );
+        setState(() {
+          loading = false;
+        });
+        return;
       } else if (e.code == 'email-already-in-use') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -65,6 +84,10 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         );
+        setState(() {
+          loading = false;
+        });
+        return;
       }
     } catch (e) {
       print(e);
@@ -163,14 +186,6 @@ class _RegisterPageState extends State<RegisterPage> {
         loading = true;
       });
       sendData();
-      //Thông báo đăng ký tài khoản thành công
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "Đăng ký tài khoản thành công",
-          ),
-        ),
-      );
     }
   }
 

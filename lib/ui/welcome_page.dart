@@ -65,7 +65,8 @@ class WelcomePage extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.green),
                       backgroundColor:
                           const MaterialStatePropertyAll<Color>(Colors.white),
-                      minimumSize: MaterialStateProperty.all(Size(300, 50)),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 50)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
@@ -86,7 +87,8 @@ class WelcomePage extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.white),
                       backgroundColor:
                           const MaterialStatePropertyAll<Color>(Colors.green),
-                      minimumSize: MaterialStateProperty.all(Size(300, 50)),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 50)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),

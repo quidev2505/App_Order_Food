@@ -27,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         loading = false;
       });
 
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -42,6 +43,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+        setState(() {
+          loading = false;
+        });
       } else if (e.code == 'wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -50,6 +54,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+        setState(() {
+          loading = false;
+        });
       }
     }
   }

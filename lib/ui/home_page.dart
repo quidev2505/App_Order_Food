@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Text(
           name,
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: const TextStyle(fontSize: 20, color: Colors.white),
         ),
       ],
     );
@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> {
         height: 270,
         width: 220,
         decoration: BoxDecoration(
-            color: Color(0xff3a3e3e), borderRadius: BorderRadius.circular(20)),
+            color: const Color(0xff3a3e3e),
+            borderRadius: BorderRadius.circular(20)),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           CircleAvatar(
             radius: 60,
@@ -46,11 +47,11 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: Text(
               name,
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
             trailing: Text(
               "$price",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),
           Padding(
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff2b2b2b),
       appBar: AppBar(
         elevation: 0.0,
         leading: const Icon(Icons.sort),
@@ -83,12 +85,12 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextField(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextField(
               decoration: InputDecoration(
                 hintText: "Tìm kiếm",
                 hintStyle: const TextStyle(color: Colors.white),
@@ -104,55 +106,63 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                categoriesContainer(
-                    image: "assets/images/1.png", name: "Tất cả"),
-                categoriesContainer(
-                    image: "assets/images/2.png", name: "Burger"),
-                categoriesContainer(
-                    image: "assets/images/3.png", name: "Recipe"),
-                categoriesContainer(
-                    image: "assets/images/4.png", name: "Pizza"),
-                categoriesContainer(
-                    image: "assets/images/douong.png", name: "Đồ uống"),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  categoriesContainer(
+                      image: "assets/images/1.png", name: "Tất cả"),
+                  categoriesContainer(
+                      image: "assets/images/2.png", name: "Burger"),
+                  categoriesContainer(
+                      image: "assets/images/3.png", name: "Recipe"),
+                  categoriesContainer(
+                      image: "assets/images/4.png", name: "Pizza"),
+                  categoriesContainer(
+                      image: "assets/images/douong.png", name: "Đồ uống"),
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            height: 490,
-            child: GridView.count(
-              shrinkWrap: false,
-              primary: false,
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              children: [
-                bottonContainer(
-                    image: "assets/images/1.png",
-                    name: 'burger1',
-                    price: 200000),
-                bottonContainer(
-                    image: "assets/images/1.png",
-                    name: 'burger1',
-                    price: 200000),
-                bottonContainer(
-                    image: "assets/images/1.png",
-                    name: 'burger1',
-                    price: 200000),
-                bottonContainer(
-                    image: "assets/images/1.png",
-                    name: 'burger1',
-                    price: 200000),
-              ],
-            ),
-          )
-        ],
+            Expanded(
+              // margin: const EdgeInsets.symmetric(horizontal: 10),
+              // height: 410,
+              child: GridView.count(
+                shrinkWrap: false,
+                primary: false,
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                children: [
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                  bottonContainer(
+                      image: "assets/images/1.png",
+                      name: 'burger1',
+                      price: 200000),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

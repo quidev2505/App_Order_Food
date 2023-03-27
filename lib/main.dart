@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'ui/authentication/register_page.dart';
-import 'ui/authentication/login_page.dart';
 import 'ui/welcome_page.dart';
-import 'ui/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff2b2b2b),
+        // scaffoldBackgroundColor: const Color(0xff2b2b2b),
         appBarTheme: const AppBarTheme(
           color: Color(0xff2b2b2b),
         ),
