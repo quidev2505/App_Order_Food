@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +13,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //Khởi tạo biến chứa thông tin user lấy từ DB
+  var userInfo;
+
+  //Hàm lấy email từ shared_preference
+  Future<Map<String, dynamic>> readEmailLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final emailLogin = prefs.getString('userEmailLogin');
+
+    //Tạo đối tượng DB
+    final db = FirebaseFirestore.instance;
+
+    //Lấy thông tin người dùng trong DB
+    if (emailLogin != null) {
+      db
+          .collection("userData")
+          .where("email", isEqualTo: emailLogin)
+          .get()
+          .then((querySnapshot) {
+        for (var docSnapshot in querySnapshot.docs) {
+          userInfo = docSnapshot.data();
+        }
+      });
+    }
+    return userInfo;
+  }
+
   Widget categoriesContainer({required String image, required String name}) {
     return Column(
       children: [
@@ -84,6 +115,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final a = readEmailLogin();
+
+    print(a);
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       drawer: Drawer(
@@ -94,16 +128,16 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const UserAccountsDrawerHeader(
+                UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpg'),
+                        image: AssetImage('assets/images/profile.jpg'),
                         fit: BoxFit.cover),
                   ),
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
                   ),
-                  accountName: Text('Trường'),
+                  accountName: Text("Trường"),
                   accountEmail: Text('truong@gmail.com'),
                 ),
                 drawerItem(name: "Profile", icon: Icons.person),
@@ -170,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                   categoriesContainer(
                       image: "assets/images/2.png", name: "Burger"),
                   categoriesContainer(
-                      image: "assets/images/3.png", name: "Recipe"),
+                      image: "assets/images/garan.png", name: "Gà"),
                   categoriesContainer(
                       image: "assets/images/4.png", name: "Pizza"),
                   categoriesContainer(

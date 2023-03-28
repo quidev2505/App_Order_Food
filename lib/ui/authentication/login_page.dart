@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/ui/home_page.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,6 +29,14 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         loading = false;
       });
+
+      //Lưu thông tin đăng nhập người dùng vào shared_prederences
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString(
+        'userEmailLogin',
+        email.text,
+      );
 
       // ignore: use_build_context_synchronously
       Navigator.push(
