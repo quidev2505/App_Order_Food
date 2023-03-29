@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:myproject_app/ui/authentication/user_data_magager.dart';
+
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import '../model/user_data.dart';
+import 'authentication/user_data_manager.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,12 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<void> _getUserData;
 
+  late Future<void> _fetchUser;
   @override
   void initState() {
     super.initState();
-    _getUserData = context.read<UserDataManager>().getUserData();
+    _fetchUser = context.read<UserDataManager>().getUserData();
+
   }
 
   Widget categoriesContainer({required String image, required String name}) {
@@ -100,7 +102,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_getUserData);
+
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       drawer: Drawer(
@@ -111,19 +113,33 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/background.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/profile.jpg'),
-                  ),
-                  accountName: Text(
-                    "trường",
-                  ),
-                  accountEmail: Text('truong@gmail.com'),
+
+                FutureBuilder(
+                  future: _fetchUser,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return UserAccountsDrawerHeader(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/background.jpg'),
+                              fit: BoxFit.cover),
+                        ),
+                        currentAccountPicture: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              context.watch<UserDataManager>().image),
+                        ),
+                        accountName:
+                            Text(context.watch<UserDataManager>().fullName),
+                        accountEmail:
+                            Text(context.watch<UserDataManager>().email),
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  // child:
+
                 ),
                 drawerItem(name: "Profile", icon: Icons.person),
                 drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
@@ -150,11 +166,22 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         elevation: 0.0,
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(9.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/profile.jpg'),
+            padding: const EdgeInsets.all(9.0),
+            child: FutureBuilder(
+              future: _fetchUser,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return CircleAvatar(
+                    backgroundImage:
+                        NetworkImage(context.watch<UserDataManager>().image),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           )
         ],
