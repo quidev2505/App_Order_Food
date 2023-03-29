@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/authentication/user_data_magager.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import '../model/user_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,30 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //Khởi tạo biến chứa thông tin user lấy từ DB
-  var userInfo;
+  late Future<void> _getUserData;
 
-  //Hàm lấy email từ shared_preference
-  Future<Map<String, dynamic>> readEmailLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final emailLogin = prefs.getString('userEmailLogin');
-
-    //Tạo đối tượng DB
-    final db = FirebaseFirestore.instance;
-
-    //Lấy thông tin người dùng trong DB
-    if (emailLogin != null) {
-      db
-          .collection("userData")
-          .where("email", isEqualTo: emailLogin)
-          .get()
-          .then((querySnapshot) {
-        for (var docSnapshot in querySnapshot.docs) {
-          userInfo = docSnapshot.data();
-        }
-      });
-    }
-    return userInfo;
+  @override
+  void initState() {
+    super.initState();
+    _getUserData = context.read<UserDataManager>().getUserData();
   }
 
   Widget categoriesContainer({required String image, required String name}) {
@@ -115,9 +100,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final a = readEmailLogin();
-
-    print(a);
+    print(_getUserData);
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       drawer: Drawer(
@@ -131,13 +114,15 @@ class _HomePageState extends State<HomePage> {
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/profile.jpg'),
+                        image: AssetImage('assets/images/background.jpg'),
                         fit: BoxFit.cover),
                   ),
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
                   ),
-                  accountName: Text("Trường"),
+                  accountName: Text(
+                    "trường",
+                  ),
                   accountEmail: Text('truong@gmail.com'),
                 ),
                 drawerItem(name: "Profile", icon: Icons.person),
