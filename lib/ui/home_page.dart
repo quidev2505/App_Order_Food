@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'authentication/user_data_manager.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,11 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   late Future<void> _fetchUser;
   @override
   void initState() {
     super.initState();
     _fetchUser = context.read<UserDataManager>().getUserData();
+
   }
 
   Widget categoriesContainer({required String image, required String name}) {
@@ -98,6 +102,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       drawer: Drawer(
@@ -108,6 +113,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+
                 FutureBuilder(
                   future: _fetchUser,
                   builder: (context, snapshot) {
@@ -133,6 +139,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   // child:
+
                 ),
                 drawerItem(name: "Profile", icon: Icons.person),
                 drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
