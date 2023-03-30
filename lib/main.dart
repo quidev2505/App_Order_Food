@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:myproject_app/ui/authentication/user_data_manager.dart';
-
 import 'ui/welcome_page.dart';
 import 'package:provider/provider.dart';
+import 'ui/food_home_page_manager.dart';
+import 'ui/home_page.dart';
+import 'ui/products/detail_product.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-
           create: (context) => UserDataManager(),
-
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FoodHomePageManager(),
         ),
       ],
       child: MaterialApp(
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: const SafeArea(
-          child: WelcomePage(),
+          child: DetailProduct(),
         ),
       ),
     );
