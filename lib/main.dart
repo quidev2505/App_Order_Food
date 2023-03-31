@@ -5,7 +5,7 @@ import 'ui/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'ui/food_home_page_manager.dart';
 import 'ui/home_page.dart';
-import 'ui/products/detail_product.dart';
+import 'ui/products/categories_product_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +27,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => FoodHomePageManager(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => CategoriesProductManager(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: const SafeArea(
-          child: DetailProduct(),
+          child: WelcomePage(),
         ),
       ),
     );

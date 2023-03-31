@@ -9,6 +9,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'authentication/user_data_manager.dart';
 import 'food_home_page_manager.dart';
 import '../model/food_model.dart';
+import 'widget/bottom_Container.dart';
+import 'products/categories_product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,17 +28,27 @@ class _HomePageState extends State<HomePage> {
     _fetchUser = context.read<UserDataManager>().getUserData();
   }
 
-  Widget categoriesContainer({required String image, required String name}) {
+  Widget categoriesContainer(
+      {required String image,
+      required String name,
+      required String nameCategories}) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.only(left: 20, top: 25),
-          height: 80,
-          width: 80,
-          decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(image)),
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10)),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    Categories(nameCategories: nameCategories)));
+          },
+          child: Container(
+            margin: const EdgeInsets.only(left: 20, top: 25),
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(image)),
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(10)),
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -47,53 +59,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-  }
-
-  Widget bottonContainer(
-      {required String image, required int price, required String name}) {
-    return Container(
-        height: 320,
-        width: 220,
-        decoration: BoxDecoration(
-            color: const Color(0xff3a3e3e),
-            borderRadius: BorderRadius.circular(20)),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          CircleAvatar(
-            // radius: 60,
-            maxRadius: 50,
-            backgroundImage: NetworkImage(image),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-            child: Column(
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(fontSize: 15, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  "$price đ",
-                  style: const TextStyle(fontSize: 15, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-              ],
-            ),
-          )
-        ]));
   }
 
   Widget drawerItem({required String name, required IconData icon}) {
@@ -222,16 +187,25 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   categoriesContainer(
-                      image: "assets/images/1.png", name: "Tất cả"),
+                      image: "assets/images/1.png",
+                      name: "Tất cả",
+                      nameCategories: "all"),
                   categoriesContainer(
-                      image: "assets/images/burgerCategories.png",
-                      name: "Burger"),
+                      image: "assets/images/burger_categori.png",
+                      name: "Burger",
+                      nameCategories: "burger"),
                   categoriesContainer(
-                      image: "assets/images/garan.png", name: "Gà"),
+                      image: "assets/images/garan.png",
+                      name: "Gà",
+                      nameCategories: "chicken"),
                   categoriesContainer(
-                      image: "assets/images/4.png", name: "Pizza"),
+                      image: "assets/images/4.png",
+                      name: "Pizza",
+                      nameCategories: "pizza"),
                   categoriesContainer(
-                      image: "assets/images/douong.png", name: "Đồ uống"),
+                      image: "assets/images/douong.png",
+                      name: "Đồ uống",
+                      nameCategories: "drink"),
                 ],
               ),
             ),
@@ -248,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 20,
                   children: foodListHomePage
                       .map(
-                        (e) => bottonContainer(
+                        (e) => BottomContainer(
                             image: e.image, price: e.price, name: e.name),
                       )
                       .toList()),
