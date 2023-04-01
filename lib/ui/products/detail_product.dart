@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 import '../../model/food_model.dart';
 
-class DetailProduct extends StatelessWidget {
+class DetailProduct extends StatefulWidget {
   const DetailProduct({Key? key, required this.foodModel}) : super(key: key);
   final FoodModel foodModel;
+
+  @override
+  State<DetailProduct> createState() => _DetailProductState();
+}
+
+class _DetailProductState extends State<DetailProduct> {
+  int amount = 1;
+
+  void changeAmount(type) {
+    if (type == "add") {
+      amount++;
+    } else {
+      if (amount == 1) {
+        amount = 1;
+      } else {
+        amount--;
+      }
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +45,7 @@ class DetailProduct extends StatelessWidget {
           Expanded(
             child: CircleAvatar(
               radius: 120,
-              backgroundImage: NetworkImage(foodModel.image),
+              backgroundImage: NetworkImage(widget.foodModel.image),
             ),
           ),
           const SizedBox(
@@ -46,7 +67,7 @@ class DetailProduct extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    foodModel.name,
+                    widget.foodModel.name,
                     style: const TextStyle(color: Colors.white, fontSize: 30),
                   ),
                   Row(
@@ -54,20 +75,23 @@ class DetailProduct extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Icon(Icons.remove),
+                          GestureDetector(
+                            onTap: () => {changeAmount("minus")},
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Icon(Icons.remove),
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
-                          const Text(
-                            "1",
-                            style: TextStyle(
+                          Text(
+                            amount.toString(),
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
@@ -75,18 +99,21 @@ class DetailProduct extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Icon(Icons.add),
+                          GestureDetector(
+                            onTap: () => {changeAmount("add")},
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Icon(Icons.add),
+                            ),
                           ),
                         ],
                       ),
                       Text(
-                        "${foodModel.price} đ",
+                        "${widget.foodModel.price} đ",
                         style:
                             const TextStyle(color: Colors.white, fontSize: 30),
                       )
@@ -100,7 +127,7 @@ class DetailProduct extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    foodModel.description,
+                    widget.foodModel.description,
                     style: const TextStyle(
                         fontSize: 20,
                         color: Colors.grey,
