@@ -13,6 +13,12 @@ class Categories extends StatefulWidget {
   State<Categories> createState() => _CategoriesState();
 }
 
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  }
+}
+
 class _CategoriesState extends State<Categories> {
   List<FoodModel> foodCategories = [];
 
@@ -24,6 +30,7 @@ class _CategoriesState extends State<Categories> {
     foodCategories = categoriesProductManager.getFoodListCategories;
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.nameCategories.capitalize()),
         elevation: 0.0,
         leading: IconButton(
             icon: const Icon(

@@ -14,23 +14,48 @@ class CategoriesProductManager with ChangeNotifier {
     List<FoodModel> newCategoriesProductList = [];
 
     final db = FirebaseFirestore.instance;
-    await db
-        .collection("foodCategories")
-        .doc("eKLbrtn9ePsA7jlbT38k")
-        .collection(nameCategories)
-        .get()
-        .then((value) {
-      for (var doc in value.docs) {
-        // print(doc.id);
-        foodModel = FoodModel(
-            image: doc.data()['image'],
-            name: doc.data()['name'],
-            price: doc.data()['price']);
-        newCategoriesProductList.add(foodModel);
-        foodModelList = newCategoriesProductList;
-        notifyListeners();
+
+    //Nếu loại là Tất cả
+    if (nameCategories == "all") {
+      List<String> nameCategoriesList = ["burger", "chicken", "pizza", "drink"];
+      for (var i = 0; i < 4; i++) {
+        await db
+            .collection("foodCategories")
+            .doc("eKLbrtn9ePsA7jlbT38k")
+            .collection(nameCategoriesList[i])
+            .get()
+            .then((value) {
+          for (var doc in value.docs) {
+            // print(doc.id);
+            foodModel = FoodModel(
+                image: doc.data()['image'],
+                name: doc.data()['name'],
+                price: doc.data()['price']);
+            newCategoriesProductList.add(foodModel);
+          }
+        });
       }
-    });
+      foodModelList = newCategoriesProductList;
+    } else {
+      //Nếu là 1 loại cụ thể
+      await db
+          .collection("foodCategories")
+          .doc("eKLbrtn9ePsA7jlbT38k")
+          .collection(nameCategories)
+          .get()
+          .then((value) {
+        for (var doc in value.docs) {
+          // print(doc.id);
+          foodModel = FoodModel(
+              image: doc.data()['image'],
+              name: doc.data()['name'],
+              price: doc.data()['price']);
+          newCategoriesProductList.add(foodModel);
+          foodModelList = newCategoriesProductList;
+        }
+      });
+    }
+    notifyListeners();
   }
 
   get getFoodListCategories {
