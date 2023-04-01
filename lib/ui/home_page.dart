@@ -223,7 +223,8 @@ class _HomePageState extends State<HomePage> {
                   children: foodListHomePage
                       .map(
                         (e) => BottomContainer(
-                            image: e.image, price: e.price, name: e.name),
+                          foodModel: e,
+                        ),
                       )
                       .toList()),
             )

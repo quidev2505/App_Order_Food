@@ -30,7 +30,8 @@ class CategoriesProductManager with ChangeNotifier {
             foodModel = FoodModel(
                 image: doc.data()['image'],
                 name: doc.data()['name'],
-                price: doc.data()['price']);
+                price: doc.data()['price'],
+                description: doc.data()['description']);
             newCategoriesProductList.add(foodModel);
           }
         });
@@ -49,7 +50,8 @@ class CategoriesProductManager with ChangeNotifier {
           foodModel = FoodModel(
               image: doc.data()['image'],
               name: doc.data()['name'],
-              price: doc.data()['price']);
+              price: doc.data()['price'],
+              description: doc.data()['description']);
           newCategoriesProductList.add(foodModel);
           foodModelList = newCategoriesProductList;
         }

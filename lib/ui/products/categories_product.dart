@@ -51,8 +51,7 @@ class _CategoriesState extends State<Categories> {
         mainAxisSpacing: 20,
         children: foodCategories
             .map(
-              (e) =>
-                  BottomContainer(image: e.image, price: e.price, name: e.name),
+              (e) => BottomContainer(foodModel: e),
             )
             .toList(),
       ),

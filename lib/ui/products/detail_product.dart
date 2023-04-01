@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../model/food_model.dart';
 
 class DetailProduct extends StatelessWidget {
-  const DetailProduct({super.key});
-
+  const DetailProduct({Key? key, required this.foodModel}) : super(key: key);
+  final FoodModel foodModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +21,14 @@ class DetailProduct extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: CircleAvatar(
               radius: 120,
-              backgroundImage: AssetImage('assets/images/1.png'),
+              backgroundImage: NetworkImage(foodModel.image),
             ),
+          ),
+          const SizedBox(
+            height: 20,
           ),
           Expanded(
             flex: 2,
@@ -41,9 +45,9 @@ class DetailProduct extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "hihi",
-                    style: TextStyle(color: Colors.white, fontSize: 40),
+                  Text(
+                    foodModel.name,
+                    style: const TextStyle(color: Colors.white, fontSize: 30),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,22 +85,23 @@ class DetailProduct extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Text(
-                        "\$ 100",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      Text(
+                        "${foodModel.price} đ",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 30),
                       )
                     ],
                   ),
                   const Text(
-                    "Mo ta",
+                    "Mô tả",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
-                  const Text(
-                    "hihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihihihihihiihihihihihi",
-                    style: TextStyle(
+                  Text(
+                    foodModel.description,
+                    style: const TextStyle(
                         fontSize: 20,
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
@@ -106,7 +111,7 @@ class DetailProduct extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff2b2b2b),
+                            backgroundColor: const Color(0xff2b2b2b),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             )),

@@ -16,7 +16,8 @@ class FoodHomePageManager with ChangeNotifier {
         foodModel = FoodModel(
             image: doc.data()['image'],
             name: doc.data()['name'],
-            price: doc.data()['price']);
+            price: doc.data()['price'],
+            description: doc.data()['description']);
         newFoodModelList.add(foodModel);
         foodModelList = newFoodModelList;
 

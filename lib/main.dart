@@ -4,7 +4,6 @@ import 'package:myproject_app/ui/authentication/user_data_manager.dart';
 import 'ui/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'ui/food_home_page_manager.dart';
-import 'ui/home_page.dart';
 import 'ui/products/categories_product_manager.dart';
 
 void main() async {
