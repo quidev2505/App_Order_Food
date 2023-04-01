@@ -19,6 +19,17 @@ extension StringExtension on String {
   }
 }
 
+String changeWidgetname(name) {
+  if (name == "all") {
+    return "Tất cả";
+  } else if (name == "chicken") {
+    return "Gà";
+  } else if (name == "drink") {
+    return "Đồ uống";
+  }
+  return name;
+}
+
 class _CategoriesState extends State<Categories> {
   List<FoodModel> foodCategories = [];
 
@@ -30,7 +41,7 @@ class _CategoriesState extends State<Categories> {
     foodCategories = categoriesProductManager.getFoodListCategories;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.nameCategories.capitalize()),
+        title: Text(changeWidgetname(widget.nameCategories).capitalize()),
         elevation: 0.0,
         leading: IconButton(
             icon: const Icon(

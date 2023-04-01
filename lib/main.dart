@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/ui/authentication/user_data_manager.dart';
+import 'package:myproject_app/ui/cart/cart_page.dart';
+import 'package:myproject_app/ui/home_page.dart';
 import 'ui/welcome_page.dart';
 import 'package:provider/provider.dart';
 import 'ui/food_home_page_manager.dart';
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: const SafeArea(
-          child: WelcomePage(),
+          child: HomePage(),
         ),
       ),
     );
