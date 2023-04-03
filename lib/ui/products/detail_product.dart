@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/cart/cart_page.dart';
+import 'package:provider/provider.dart';
 import '../../model/food_model.dart';
+import '../cart/cart_manager.dart';
 
 class DetailProduct extends StatefulWidget {
   const DetailProduct({Key? key, required this.foodModel}) : super(key: key);
@@ -10,16 +13,16 @@ class DetailProduct extends StatefulWidget {
 }
 
 class _DetailProductState extends State<DetailProduct> {
-  int amount = 1;
+  int quantity = 1;
 
-  void changeAmount(type) {
+  void changeQuantity(type) {
     if (type == "add") {
-      amount++;
+      quantity++;
     } else {
-      if (amount == 1) {
-        amount = 1;
+      if (quantity == 1) {
+        quantity = 1;
       } else {
-        amount--;
+        quantity--;
       }
     }
     setState(() {});
@@ -27,6 +30,8 @@ class _DetailProductState extends State<DetailProduct> {
 
   @override
   Widget build(BuildContext context) {
+    // CartManager cartManager = Provider.of<CartManager>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       appBar: AppBar(
@@ -76,7 +81,7 @@ class _DetailProductState extends State<DetailProduct> {
                       Row(
                         children: [
                           GestureDetector(
-                            onTap: () => {changeAmount("minus")},
+                            onTap: () => {changeQuantity("minus")},
                             child: Container(
                               height: 40,
                               width: 40,
@@ -90,7 +95,7 @@ class _DetailProductState extends State<DetailProduct> {
                             width: 10,
                           ),
                           Text(
-                            amount.toString(),
+                            quantity.toString(),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -100,7 +105,7 @@ class _DetailProductState extends State<DetailProduct> {
                             width: 10,
                           ),
                           GestureDetector(
-                            onTap: () => {changeAmount("add")},
+                            onTap: () => {changeQuantity("add")},
                             child: Container(
                               height: 40,
                               width: 40,
@@ -142,7 +147,12 @@ class _DetailProductState extends State<DetailProduct> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             )),
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<CartManager>().addToCart(
+                              food: widget.foodModel, quantity: quantity);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const CartPage()));
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
