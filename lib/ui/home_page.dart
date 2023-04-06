@@ -1,16 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/model/food_model.dart';
+import 'package:myproject_app/ui/welcome_page.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'authentication/user_data_manager.dart';
 import 'food_home_page_manager.dart';
-import '../model/food_model.dart';
 import 'widget/bottom_Container.dart';
 import 'products/categories_product.dart';
+import 'cart/cart_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FutureBuilder(
                   future: _fetchUser,
@@ -116,24 +114,43 @@ class _HomePageState extends State<HomePage> {
                   },
                   // child:
                 ),
-                drawerItem(name: "Profile", icon: Icons.person),
-                drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const CartPage(),
+                      ),
+                    );
+                  },
+                  child:
+                      drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
+                ),
                 drawerItem(name: "Order", icon: Icons.shop),
-                const Divider(
-                  thickness: 2,
-                  color: Colors.white,
+                // const ListTile(
+                //   leading: Text(
+                //     'Communicate',
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 20,
+                //     ),
+                //   ),
+                // ),
+                GestureDetector(
+                  onTap: () async {
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    await prefs.remove('userEmailLogin');
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const WelcomePage(),
+                      ),
+                    );
+                  },
+                  child: drawerItem(name: "Logout", icon: Icons.exit_to_app),
                 ),
-                const ListTile(
-                  leading: Text(
-                    'Communicate',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                drawerItem(name: "Change", icon: Icons.lock),
-                drawerItem(name: "Logout", icon: Icons.exit_to_app),
               ],
             ),
           ),
