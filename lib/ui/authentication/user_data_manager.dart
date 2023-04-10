@@ -35,6 +35,7 @@ class UserDataManager with ChangeNotifier {
     _fullName = userInfo['fullName'];
     _phoneNumber = userInfo['phoneNumber'];
     _image = userInfo['image'];
+    notifyListeners();
   }
 
   String get email => _email;

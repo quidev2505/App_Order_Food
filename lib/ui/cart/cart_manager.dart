@@ -49,6 +49,13 @@ class CartManager with ChangeNotifier {
     notifyListeners();
   }
 
+  //Hàm xóa All giỏ hàng
+  void deleteAllCart() {
+    cartItemList = [];
+    newCartItemList = [];
+    notifyListeners();
+  }
+
   get getCartItemList {
     return cartItemList;
   }

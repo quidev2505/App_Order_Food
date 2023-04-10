@@ -126,15 +126,6 @@ class _HomePageState extends State<HomePage> {
                       drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
                 ),
                 drawerItem(name: "Order", icon: Icons.shop),
-                // const ListTile(
-                //   leading: Text(
-                //     'Communicate',
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //       fontSize: 20,
-                //     ),
-                //   ),
-                // ),
                 GestureDetector(
                   onTap: () async {
                     final SharedPreferences prefs =
