@@ -137,13 +137,13 @@ class _CartPageState extends State<CartPage> {
         ),
       ),
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+          title: const Text("Giỏ hàng"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
       body: Column(
         children: [
           Expanded(

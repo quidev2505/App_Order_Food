@@ -9,6 +9,8 @@ import 'widget/bottom_Container.dart';
 import 'products/categories_product.dart';
 import 'cart/cart_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'order/order_page.dart';
+import '../ui/products/find_product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,8 +20,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //Biến chứa thông tin user đọc từ CSDL
   late Future<void> _fetchUser;
+
+  //Biến chứa danh sách sản phẩm sẽ hiển thị tại trang chủ đọc từ CSDL
   List<FoodModel> foodListHomePage = [];
+
+  //Biến chứa keyword để tìm sản phẩm
+  TextEditingController keyword = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -125,7 +133,16 @@ class _HomePageState extends State<HomePage> {
                   child:
                       drawerItem(name: "Cart", icon: Icons.add_shopping_cart),
                 ),
-                drawerItem(name: "Order", icon: Icons.shop),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const OrderPage(),
+                      ),
+                    );
+                  },
+                  child: drawerItem(name: "Order", icon: Icons.shop),
+                ),
                 GestureDetector(
                   onTap: () async {
                     final SharedPreferences prefs =
@@ -175,12 +192,20 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
+              controller: keyword,
               decoration: InputDecoration(
                 hintText: "Tìm kiếm",
                 hintStyle: const TextStyle(color: Colors.white),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
+                prefixIcon: GestureDetector(
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            FindProduct(keyword: keyword.text)));
+                  },
                 ),
                 filled: true,
                 fillColor: const Color(0xff3a3e3e),
