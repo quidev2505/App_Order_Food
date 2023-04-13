@@ -5,9 +5,6 @@ import '../authentication/user_data_manager.dart';
 import '../widget/cart_item.dart';
 import 'cart_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import '../../model/food_model.dart';
-import '../../model/cart_item_model.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

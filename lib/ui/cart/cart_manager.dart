@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:myproject_app/model/food_model.dart';
 import '../../model/cart_item_model.dart';

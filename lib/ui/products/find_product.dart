@@ -26,16 +26,21 @@ class FindProduct extends StatelessWidget {
           .collection("foodCategories")
           .doc("eKLbrtn9ePsA7jlbT38k")
           .collection(nameCategoriesList[i])
-          .where("name", isEqualTo: keyword)
           .get()
           .then((value) {
         for (var doc in value.docs) {
-          foodModel = FoodModel(
-              image: doc.data()['image'],
-              name: doc.data()['name'],
-              price: doc.data()['price'],
-              description: doc.data()['description']);
-          newCategoriesProductList.add(foodModel);
+          if (doc
+              .data()['name']
+              .toString()
+              .toLowerCase()
+              .contains(keyword.toString().toLowerCase())) {
+            foodModel = FoodModel(
+                image: doc.data()['image'],
+                name: doc.data()['name'],
+                price: doc.data()['price'],
+                description: doc.data()['description']);
+            newCategoriesProductList.add(foodModel);
+          }
         }
       });
     }

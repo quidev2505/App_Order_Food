@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myproject_app/ui/authentication/register_page.dart';
 import 'package:myproject_app/ui/home_page.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -195,12 +194,22 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text("Bạn chưa có tài khoản?"),
-                Text(
-                  "Đăng ký ngay",
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              children: [
+                const Text("Bạn chưa có tài khoản?"),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPage(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Đăng ký ngay",
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             )

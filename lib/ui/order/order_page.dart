@@ -19,8 +19,8 @@ class OrderPage extends StatelessWidget {
         ),
         backgroundColor: const Color(0xff2b2b2b),
         body: ListView(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 10,
             ),
             OrderTile(),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class FoodModel {
   final String image;
   final String name;

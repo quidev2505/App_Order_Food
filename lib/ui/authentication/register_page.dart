@@ -302,12 +302,22 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("Nếu đã có tài khoản?"),
-              Text(
-                "Đăng nhập ngay",
-                style:
-                    TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Đăng nhập ngay",
+                  style: TextStyle(
+                      color: Colors.green, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           )
