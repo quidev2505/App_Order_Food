@@ -48,7 +48,7 @@ class WelcomePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Color(0xff3a3e3e),
                   ),
                 ),
                 Column(
@@ -61,8 +61,9 @@ class WelcomePage extends StatelessWidget {
                 ),
                 TextButton(
                   style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green),
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xff3a3e3e),
+                      ),
                       backgroundColor:
                           const MaterialStatePropertyAll<Color>(Colors.white),
                       minimumSize:
@@ -70,7 +71,9 @@ class WelcomePage extends StatelessWidget {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: const BorderSide(color: Colors.green)))),
+                              side: const BorderSide(
+                                color: Color(0xff3a3e3e),
+                              )))),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -85,14 +88,15 @@ class WelcomePage extends StatelessWidget {
                   style: ButtonStyle(
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                      backgroundColor:
-                          const MaterialStatePropertyAll<Color>(Colors.green),
+                      backgroundColor: const MaterialStatePropertyAll<Color>(
+                        Color(0xff3a3e3e),
+                      ),
                       minimumSize:
                           MaterialStateProperty.all(const Size(300, 50)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
-                              side: const BorderSide(color: Colors.green)))),
+                              side: const BorderSide(color: Colors.white)))),
                   onPressed: () {
                     Navigator.push(
                       context,

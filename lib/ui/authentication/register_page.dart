@@ -8,6 +8,8 @@ import 'package:myproject_app/ui/widget/my_textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../welcome_page.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -194,9 +196,14 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       key: globalKey,
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff3a3e3e),
         leading: IconButton(
-          onPressed: () => {Navigator.pop(context)},
+          onPressed: () => {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const WelcomePage()))
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
@@ -273,9 +280,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: const Color(0xff3a3e3e),
                       shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Colors.green, width: 2),
+                        side: const BorderSide(color: Colors.white, width: 2),
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
@@ -303,7 +310,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Nếu đã có tài khoản?"),
+              const Text("Nếu đã có tài khoản?"),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -313,10 +320,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   );
                 },
-                child: Text(
+                child: const Text(
                   "Đăng nhập ngay",
-                  style: TextStyle(
-                      color: Colors.green, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

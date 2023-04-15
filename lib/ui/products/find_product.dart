@@ -73,18 +73,21 @@ class FindProduct extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             listProductFindByKeyword = snapshot.data ?? [];
           }
-          return GridView.count(
-            shrinkWrap: false,
-            primary: false,
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            children: listProductFindByKeyword
-                .map(
-                  (e) => BottomContainer(foodModel: e),
-                )
-                .toList(),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: GridView.count(
+              shrinkWrap: false,
+              primary: false,
+              crossAxisCount: 2,
+              childAspectRatio: 0.8,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              children: listProductFindByKeyword
+                  .map(
+                    (e) => BottomContainer(foodModel: e),
+                  )
+                  .toList(),
+            ),
           );
         },
       ),

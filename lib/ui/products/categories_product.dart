@@ -53,18 +53,21 @@ class _CategoriesState extends State<Categories> {
             }),
       ),
       backgroundColor: const Color(0xff2b2b2b),
-      body: GridView.count(
-        shrinkWrap: false,
-        primary: false,
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        children: foodCategories
-            .map(
-              (e) => BottomContainer(foodModel: e),
-            )
-            .toList(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: GridView.count(
+          shrinkWrap: false,
+          primary: false,
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          children: foodCategories
+              .map(
+                (e) => BottomContainer(foodModel: e),
+              )
+              .toList(),
+        ),
       ),
     );
   }

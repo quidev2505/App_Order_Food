@@ -192,6 +192,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
+              style: const TextStyle(color: Colors.white),
               controller: keyword,
               decoration: InputDecoration(
                 hintText: "Tìm kiếm",

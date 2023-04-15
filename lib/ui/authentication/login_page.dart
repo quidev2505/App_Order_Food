@@ -5,6 +5,8 @@ import 'package:myproject_app/ui/home_page.dart';
 import 'package:myproject_app/ui/widget/my_textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../welcome_page.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -132,9 +134,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff3a3e3e),
         leading: IconButton(
-          onPressed: () => {Navigator.pop(context)},
+          onPressed: () => {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => const WelcomePage()))
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
@@ -175,9 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: const Color(0xff3a3e3e),
                         shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.green, width: 2),
+                          side: const BorderSide(color: Colors.white, width: 2),
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),

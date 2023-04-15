@@ -40,6 +40,9 @@ class BottomContainer extends StatelessWidget {
                   style: const TextStyle(fontSize: 15, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(
+                  height: 7,
+                ),
                 Text(
                   "${foodModel.price} đ",
                   style: const TextStyle(fontSize: 15, color: Colors.white),
@@ -48,19 +51,19 @@ class BottomContainer extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-                Icon(Icons.star, size: 20, color: Colors.white),
-              ],
-            ),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: const [
+          //       Icon(Icons.star, size: 20, color: Colors.white),
+          //       Icon(Icons.star, size: 20, color: Colors.white),
+          //       Icon(Icons.star, size: 20, color: Colors.white),
+          //       Icon(Icons.star, size: 20, color: Colors.white),
+          //       Icon(Icons.star, size: 20, color: Colors.white),
+          //     ],
+          //   ),
+          // )
         ]));
   }
 }
