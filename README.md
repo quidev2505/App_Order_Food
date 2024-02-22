@@ -1,4 +1,4 @@
-# Project học phần PTUD Di động (CT484)
+# Project học phần phát triển ứng dụng di động
 
 Học kỳ 2, Năm học 2022-2023
 
