@@ -1,4 +1,4 @@
-# Project học phần phát triển ứng dụng di động
+# Project học phần phát triển ứng dụng di động (Flutter)
 
 Học kỳ 2, Năm học 2022-2023
 
